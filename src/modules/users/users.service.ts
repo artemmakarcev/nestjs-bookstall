@@ -2,14 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { UsersRepository } from './users.repository';
 import { RegisterUserDto } from './dto/register-user.dto';
-import bcrypt from 'bcrypt';
+import { CryptoService } from '../crypto/crypto.service';
 
 @Injectable()
 export class UsersService {
-  constructor(private usersRepository: UsersRepository) {}
+  constructor(
+    private usersRepository: UsersRepository,
+    private readonly cryptoService: CryptoService,
+  ) {}
   async registerUser(dto: RegisterUserDto): Promise<number> {
-    const passwordHash = await bcrypt.hash(dto.password, 10);
+    const passwordHash = await this.cryptoService.generateHash(dto.password);
     const user = new User();
+
     user.age = dto.age;
     user.email = dto.email;
     user.name = dto.name;

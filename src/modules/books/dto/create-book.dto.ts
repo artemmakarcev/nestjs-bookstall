@@ -1,12 +1,12 @@
-import { Type } from 'class-transformer';
 import {
-  IsInt,
   IsOptional,
-  IsString,
-  Max,
-  Min,
   MinLength,
+  IsString,
+  IsInt,
+  Min,
+  Max,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateBookDto {
   @IsString()
@@ -16,9 +16,8 @@ export class CreateBookDto {
   @IsInt()
   @Min(5)
   @Max(120)
-  @IsOptional()
   @Type(() => Number)
-  ageRestriction?: number;
+  ageRestriction: number;
 
   @IsString()
   author: string;
