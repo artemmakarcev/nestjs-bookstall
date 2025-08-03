@@ -10,6 +10,7 @@ export class UsersService {
     private usersRepository: UsersRepository,
     private readonly cryptoService: CryptoService,
   ) {}
+
   async registerUser(dto: RegisterUserDto): Promise<number> {
     const passwordHash = await this.cryptoService.generateHash(dto.password);
     const user = new User();

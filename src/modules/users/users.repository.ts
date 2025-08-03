@@ -30,6 +30,8 @@ export class UsersRepository {
   }
 
   findAll() {
-    return this.usersOrmRepository.find();
+    return this.usersOrmRepository.find({
+      select: ['createdAt', 'name', 'email', 'age'],
+    });
   }
 }
